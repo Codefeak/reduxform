@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
+import { Link } from 'react-router-dom';
 import './skillAndLocation.css';
 
 const SkillAndLocation =(props)=>{
@@ -131,6 +132,7 @@ const SkillAndLocation =(props)=>{
                 </div>
               </div>
             </div>
+            <Link to="/Portfolio">Next</Link>
           </section>
 	)
 }

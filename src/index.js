@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { reducer } from './reducer';
 import Header from './Header';
 import Footer from './Footer';
+
 import './index.css';
 
 
@@ -14,9 +15,12 @@ console.log(store)
 ReactDOM.render(
 	<Provider store = { store }>
 		<div className="main-container">
-      		<Header/>
-          	<Form onSubmit ={(store)=>console.log(store)}/>
-          	<Footer/>
+			<Header/>
+				
+				<Form onSubmit ={(store)=>console.log(store)}/>
+      	
+	      	<Footer/>
 
-      	</div>
+		</div>
+		
 	</Provider>, document.getElementById('root'));
