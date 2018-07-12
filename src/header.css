@@ -1,0 +1,15 @@
+.header-container{
+  width:50vw;
+  text-align: center;
+  text-transform: capitalize;
+  padding-top:1vw;
+}
+
+.header-container>h1{
+  font-size: 2.17vw;
+}
+
+.header-container>p{
+  font-size: 0.9vw;
+}
+

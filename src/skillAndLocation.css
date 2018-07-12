@@ -1,0 +1,120 @@
+.skills-location{
+  width: 40vw;
+  margin-left: 5.5vw;
+  margin-top: 3vw;
+}
+
+.skills-location h3{
+  font-size:1.17vw;
+}
+
+.skills-location p, .left-column p{
+  font-size: 0.9vw;
+}
+
+.radio-btn-container{
+  display: flex;
+  flex-direction: row;
+  width: 40vw;
+}
+
+.radio-btn-container input[type="radio"]{
+  width: 0;
+  height: 0;
+  margin:0;
+  visibility: hidden;
+}
+
+.radio-btn-container input[type="radio"] + label{
+  width: 100%;
+  margin-right: 0.7vw;
+  border-style:solid;
+  border-width: thin;
+  padding: 0.7vw 1.5vw;
+  font-size: 0.79vw;
+  text-align: center;
+}
+
+.radio-btn-container input[type="radio"] + label:last-child{
+  margin-right: 0;
+}
+
+.radio-btn-container input[type="radio"]:checked + label{
+  width: 100%;
+  margin-right: 0.7vw;
+  border-color: #01B1F2;
+  padding: 0.7vw 1.5vw;
+  background-color: #01B1F2;
+  text-align: center;
+}
+
+.radio-btn-container input[type="radio"]:checked + label:last-child{
+  margin-right: 0;
+}
+
+.column-container{
+  width:40vw;
+  margin-top: 1vw;
+  display: flex;
+  flex-direction: row;
+}
+
+.left-column{
+  width:20vw;
+}
+
+.checkbox-container{
+  width: 20vw;
+  margin-top: 1vw;
+}
+
+.checkbox-container input + label{
+  font-size: 0.79vw;
+
+}
+
+.right-column{
+  width: 20vw;
+}
+
+.column-container input[type="checkbox"]{
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  margin: 0;
+
+}
+
+
+.column-container input[type="checkbox"] + label:before {
+  border: 0.01vw solid #cbd3d4;
+  content: "\00a0";
+  display: inline-block;
+  height: 1vw;
+  vertical-align: top;
+  width: 1vw;
+  margin-right: 1vw;
+  margin-top: 0.25vw;
+}
+
+.column-container input[type="checkbox"]:checked + label:before {
+  background: #cbd3d4;
+  color: #333;
+  content: "\2713";
+  text-align: center;
+  vertical-align: bottom;
+  height: 1vw;
+  vertical-align: top;
+  width: 1vw;
+  margin-right: 1vw;
+  margin-top: 0.25vw;
+}
+
+.right-column p:nth-child(2){
+  font-size: 0.75vw;
+  color: #8b8c8c;
+}
+
+.portfolio-container input{
+  width:40vw;
+}

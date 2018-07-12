@@ -1,0 +1,35 @@
+.portfolio-container{
+  width: 40vw;
+  margin-left: 5.5vw;
+  margin-top: 3vw;
+}
+
+
+.portfolio-container h3{
+  font-size:1.17vw;
+}
+
+.portfolio-container p{
+  font-size: 0.9vw;
+}
+
+
+textarea{
+  width:40vw;
+  background-color:#454E57;
+  border-color: #727272;
+}
+
+#url{
+  height: 2.5vw;
+  margin-top: 3vw;
+  margin-bottom: 1.3vw;
+  color: #F6FBFC;
+  border: none;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  border-bottom-color: #727272;
+  font-size: 0.87vw;
+  background-color: #454E57;
+  
+}

@@ -1,0 +1,20 @@
+body{
+  background-color: #333333;
+  color:#cbd3d4;
+  font-family: sans-serif;
+}
+
+.main-container{
+  width:50vw;
+  background-color: #454E57;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.true{
+  display:block;
+}
+
+.false{
+  display:none;
+}
