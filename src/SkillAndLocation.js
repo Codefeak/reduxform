@@ -1,11 +1,31 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { Link } from 'react-router-dom';
+import { Field, reduxForm, getFormSyncErrors } from 'redux-form';
 import './skillAndLocation.css';
+import Checkboxes from './checkboxes';
+import { connect } from 'react-redux';
+import validate from './validate';
+import PropTypes from 'prop-types';
 
 const SkillAndLocation =(props)=>{
+  console.log(typeof(props.invalid))
+  const experience = [
+                      {label: 'Visual Design', value:'Visual Design'},
+                      {label:'Ux Design', value:'Ux Design'},
+                      {label: 'Front-End Development', value: 'FrontEnd Development'},
+                     ]
+
+  const interest =  [
+                      {label: 'Austin, Texas', value:'Austin,Texas' },
+                      {label: 'New York, New York', value:'New York, New York' },
+                      {label: 'Toronto, Canada', value:'Toronto, Canada' },
+                      {label: 'Shanghai, China', value:'Shanghai, China' },
+                      {label: 'Dublin, Ireland', value:'Dublin, Ireland' },
+                      {label: 'Hursley, United Kingdom', value:'Hursley, United Kingdom' },
+                      {label: 'Boeblingen, Germany', value:'Boeblingen, Germany' },
+                      {label: 'Somewhere else', value:'Somewhere else' },
+                    ]
 	return(
-		<section className="skills-location">
+		<form onSubmit={props.handleSubmit} className="skills-location" id="skills-location">
             <h3>2.Skills and Location</h3>
             <hr/>
             <p>Which is your primaryDesign discipline?*</p>
@@ -14,7 +34,8 @@ const SkillAndLocation =(props)=>{
                 component="input" 
                 type="radio" 
                 id = "btn-1" 
-                name="primaryDesign" 
+                name="primaryDesign"
+                value="Design Research"
                 />
                	<label htmlFor="btn-1">Design Research</label>
               <Field
@@ -22,6 +43,7 @@ const SkillAndLocation =(props)=>{
                 type="radio" 
                 id = "btn-2" 
                 name="primaryDesign" 
+                value="Visual Design"
                 />
                 <label htmlFor ="btn-2">Visual Design</label>
               <Field
@@ -29,6 +51,7 @@ const SkillAndLocation =(props)=>{
                 type="radio" 
                 id="btn-3" 
                 name="primaryDesign" 
+                value="UX Design"
                 />
               <label htmlFor="btn-3" >UX Design</label>
               <Field
@@ -36,6 +59,7 @@ const SkillAndLocation =(props)=>{
                 type="radio" 
                 id="btn-4" 
                 name="primaryDesign" 
+                value="Front-end Dev"
                 />
               <label htmlFor="btn-4">Front-end Dev</label>
 
@@ -44,28 +68,7 @@ const SkillAndLocation =(props)=>{
               <div className="left-column">
                 <p>Do you have experience with any other disciplines?</p>
                 <div className="checkbox-container">
-                  <Field
-                    component="input" 
-                    type="checkbox" 
-                    id ="v-design" 
-                    name="Visual Design"
-                    />
-                  <label htmlFor="v-design">Visual design</label><br/>
-                  <Field
-                    component="input" 
-                    type="checkbox" 
-                    id="ux-design" 
-                    name="UX Design"
-                    />
-                  <label htmlFor="ux-design">UX Design</label><br/>
-                  <Field
-                    component="input" 
-                    type="checkbox" 
-                    id="front-end" 
-                    name="Front-end Development" 
-                    />
-                  <label htmlFor="front-end">Front-end Development</label><br/>
-                  
+                  <Checkboxes options = { experience } name= 'experience'/>                  
                 </div>
               </div>
               <div className="right-column">
@@ -73,68 +76,36 @@ const SkillAndLocation =(props)=>{
                 <p>You must be legally authorized to work without visa sponsorship
                    in the location(s) you choose.</p>
                 <div className="checkbox-container">
-                  <Field
-                    component="input" 
-                    type="checkbox" 
-                    id="austin-texas" 
-                    name="Austin,Texas"
-                    />
-                  <label htmlFor="austin-texas">Austin Texas</label><br/>
-                  <Field
-                    component="input" 
-                    type="checkbox" 
-                    id="new-york" 
-                    name="New York, New York"
-                    />
-                  <label htmlFor="new-york">New York, New York</label><br/>
-                  <Field
-                    component="input" 
-                    type="checkbox" 
-                    id="canada" 
-                    name="Toronto, Canada"
-                    />
-                  <label htmlFor="canada">Toronto, Canada</label><br/>
-                  <Field
-                    component="input" 
-                    type="checkbox" 
-                    id="china" 
-                    name="Shanghai, China"
-                    />
-                  <label htmlFor="china">Shanghai, China</label><br/>
-                  <Field
-                    component="input" 
-                    type="checkbox" 
-                    id="ireland" 
-                    name="Dublin, Ireland"
-                    />
-                  <label htmlFor="ireland">Dublin, Ireland</label><br/>
-                  <Field
-                    component="input" 
-                    type="checkbox" 
-                    id="uk" 
-                    name="Hursley, United Kingdom"
-                    />
-                  <label htmlFor="uk">Hursley, United Kingdom</label><br/>
-                  <Field
-                    component="input" 
-                    type="checkbox" 
-                    id="germany" 
-                    name="Boeblingen, Germany"
-                    />
-                  <label htmlFor="germany">Boeblingen, Germany</label><br/>
-                  <Field
-                    component="input" 
-                    type="checkbox" 
-                    id="other-places" 
-                    name="Somewhere else"
-                    />
-                  <label htmlFor="other-places">Somewhere else</label><br/>
+                  <Checkboxes options ={ interest } name = "interest"/>
                 </div>
               </div>
             </div>
-            <Link to="/Portfolio">Next</Link>
-          </section>
+            <button onClick = {()=>props.history.push("/PersonalInformation")} >Back</button> 
+            <button disabled = {props.invalid} type="submit" >Next</button>
+          </form>
 	)
 }
 
-export default SkillAndLocation;
+const mapStateToProps = state =>{
+  return{
+    myFormErrors:getFormSyncErrors('mainForm')(state)
+  };
+};
+
+const reduxFormConnect = reduxForm({
+    form: 'mainForm',
+    validate,
+    destroyOnUnmount: false,
+    forceUnregisterOnUnmount: true,
+})(SkillAndLocation)
+
+const SkillAndLocationConnect = connect(mapStateToProps)(reduxFormConnect);
+
+export default SkillAndLocationConnect;
+
+SkillAndLocation.propTypes ={
+  invalid : PropTypes.bool.isRequired,
+  handleSubmit : PropTypes.func.isRequired,
+  history : PropTypes.object.isRequired,
+
+}

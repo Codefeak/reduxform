@@ -1,10 +1,14 @@
 import React from 'react';
-import { Field } from 'redux-form';
+import { Field, reduxForm, getFormSyncErrors } from 'redux-form';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import validate from './validate';
 import './portfolio.css';
 
 const Portfolio=(props)=>{
+  console.log(props)
 	return(
-		<section className="portfolio-container">
+		<form className="portfolio-container" id="portfolio-container" onSubmit={props.handleSubmit}>
             <h3>3.Portfolio</h3>
             <hr/>
             <p>Prove you're IBM's next great designer by showing us who you are.
@@ -24,10 +28,33 @@ const Portfolio=(props)=>{
               placeholder="Anythingelse (another link, availability, etc.)?"
               >
             </Field>
-          <button type="Submit" disabled ={ props.Invalid} >Submit</button>
-            
-          </section>
+            <button onClick = {()=>props.history.push("/SkillsAndLocation")} >Back</button> 
+            <button type="Submit" disabled ={props.invalid}>Submit</button>
+          </form>
 	)
 }
 
-export default Portfolio
+const mapStateToProps = state =>{
+  return{
+    myFormErrors:getFormSyncErrors('mainForm')(state)
+  };
+};
+
+const reduxFormConnect = reduxForm({
+    form: 'mainForm',
+    validate,
+    destroyOnUnmount: false,
+    forceUnregisterOnUnmount: true,
+})(Portfolio)
+
+const PortfolioConnect = connect(mapStateToProps)(reduxFormConnect);
+
+export default connect()(PortfolioConnect);
+
+
+Portfolio.propTypes ={
+  invalid : PropTypes.bool.isRequired,
+  history : PropTypes.object.isRequired,
+  handleSubmit : PropTypes.func.isRequired,
+
+}

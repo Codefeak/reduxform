@@ -11,13 +11,12 @@ import './index.css';
 
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-console.log(store)
 ReactDOM.render(
-	<Provider store = { store }>
+	<Provider store = { store } >
 		<div className="main-container">
 			<Header/>
 				
-				<Form onSubmit ={(store)=>console.log(store)}/>
+				<Form />
       	
 	      	<Footer/>
 

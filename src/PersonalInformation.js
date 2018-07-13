@@ -1,11 +1,14 @@
 import React from 'react';
-import { Field } from 'redux-form';
-import { Link } from 'react-router-dom';
+import { Field, reduxForm, getFormSyncErrors } from 'redux-form';
 import './personalInformation.css';
+import { connect } from 'react-redux';
+import validate from './validate';
+import PropTypes from 'prop-types';
 
 const PersonalInformation =(props)=>{
+  console.log(props);
 	return(
-		<section className="personal-info">
+		<form onSubmit={props.handleSubmit} className="personal-info" id="personal-info">
             <h3>1.Personal Information</h3>
             <hr/>
             <div className="name-container">
@@ -98,9 +101,32 @@ const PersonalInformation =(props)=>{
                 />
                
             </div>
-            <Link to="/SkillsAndLocation">Next</Link>
-          </section>
+            <button disabled = {props.invalid} type='submit' >Next</button>
+          </form>
 	)
 }
 
-export default PersonalInformation;
+const mapStateToProps = state =>{
+  return{
+    myFormErrors:getFormSyncErrors('mainForm')(state)
+  };
+};
+
+const reduxFormConnect = reduxForm({
+    form: 'mainForm',
+    validate,
+    destroyOnUnmount: false,
+    forceUnregisterOnUnmount: true,
+})(PersonalInformation)
+
+const PersonalInformationConnect = connect(mapStateToProps)(reduxFormConnect);
+
+
+export default connect ()(PersonalInformationConnect);
+
+
+PersonalInformation.propTypes ={
+  invalid : PropTypes.bool.isRequired,
+  handleSubmit : PropTypes.func.isRequired,
+
+}
